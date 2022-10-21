@@ -46,6 +46,7 @@ body {
   font-size: 32px;
   line-height: 1.5;
   margin-bottom: 8px;
+  margin-top: 32px;
   text-transform: uppercase;
   color: #424847;
 }
@@ -102,4 +103,15 @@ p {
 .utitlity a {
   color: #3a4644;
   margin-left: 16px;
+}
+.tweetDate {
+  width: 129px;
+  height: 7px;
+  position: absolute;
+  left: px;
+  padding: 24px;
+  left: 0px;
+  top: 8px;
+  background: #96a19f;
+  /* border-radius: 10px; */
 }

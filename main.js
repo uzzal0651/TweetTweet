@@ -6,6 +6,8 @@ let getTitleName = document.querySelector(".input-title");
 let getTweetDescipt = document.querySelector("#tweetDesc");
 let getTweetContainer = document.querySelector(".tweetContainer");
 let getTweetPrice = document.querySelector(".tw-input-txt3");
+let tweetDesc = document.querySelector("#tweetDesc");
+let wordCount = document.querySelector(".wordCount");
 let products = localStorage.getItem("storeProducts")
   ? JSON.parse(localStorage.getItem("storeProducts"))
   : [];
@@ -30,6 +32,7 @@ function addProduct(titleName, tweetDescipt, tweetPrice) {
     titleName,
     tweetDescipt,
     tweetPrice,
+    date: new Date().toLocaleString().split(",")[0],
   };
 
   //memory data store
@@ -60,9 +63,11 @@ function showProductToUI(productInfo) {
 
   //const { id, name, price } = productInfo;
   const elm = `<div class="tweet-list" data-productId="${productInfo.id}"> 
+  <div class="tweetDate">Date:${productInfo.date}</div>
   <div class="utitlity">
     <a href=""><i class="icofont-ui-edit"></i></a>
    <i class="icofont-ui-delete delete-product"></i>
+   
   </div>
   <h2> ${productInfo.titleName} </h2>
   <p>
@@ -93,9 +98,11 @@ function showAllProductsToUI(products) {
   products.forEach((product) => {
     const { id, name, price } = product;
     liElms += `<div class="tweet-list" data-productId="${product.id}">
+    <div class="tweetDate">Date:${product.date}</div>
     <div class="utitlity">
       <a href=""><i class="icofont-ui-edit"></i></a>
       <i class="icofont-ui-delete delete-product"></i>
+      
     </div>
     <h2> ${product.titleName} </h2>
     <p>
@@ -154,3 +161,17 @@ function handleManipulateProduct(evt) {
 }
 showAllProductsToUI(products);
 getTweetContainer.addEventListener("click", handleManipulateProduct);
+
+tweetDesc.addEventListener("input", function () {
+  let tweetDescdata = tweetDesc.value.trim();
+  wordCount.textContent = tweetDescdata
+    .split(/\s+/)
+    .filter((item) => item).length;
+
+  let totalWord = tweetDescdata.split(/\s+/).filter((item) => item).length;
+
+  if (totalWord > 10) {
+    alert("you cross the limit");
+    tweetDesc.setAttribute("disabled", "");
+  }
+});
